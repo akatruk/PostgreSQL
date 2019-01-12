@@ -25,3 +25,6 @@ git add test1488.git
 git status
 git commit -m "First java program" test1488.git
 git push -u origin master
+
+#update file
+git remote add origin https://githab.com/akatruk/postgresql.git
