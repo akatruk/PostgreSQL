@@ -1,0 +1,49 @@
+#create file
+touch or >
+
+#copy file
+cp
+
+#file information
+file
+
+
+#list files in directory
+l or ll or dir or ls or ls -la
+
+#3 lesson
+sudo !!
+w
+du
+look
+tree
+uname -a
+pkill -f [name]
+
+#4 lesson
+mtr google.com
+#alias commands
+alias her=ls
+
+#combinating commands
+cd /home/akatruk/Documents/ && ll
+
+#Qustions postgres
+1. How to use @PGDATA in linux commands
+2. How to use initdb command
+
+postgres@1488:~$ initdb
+initdb: command not found
+
+3. How to use pg_ctl command
+
+postgres@1488:~$ pg_ctl
+pg_ctl: command not found
+
+4. How to use prepared scripts in postgres
+
+5. Find list of all system tables in postgres
+
+6. How to use variable
+
+7. set .psqlrc to \set
