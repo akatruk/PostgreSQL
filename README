@@ -27,4 +27,8 @@ git commit -m "First java program" test1488.git
 git push -u origin master
 
 #update file
-git remote add origin https://githab.com/akatruk/postgresql.git
+git commit -m "README" README
+git push -u origin master
+
+#update local perository
+git pull origin master
