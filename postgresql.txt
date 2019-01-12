@@ -1,0 +1,44 @@
+#home directory
+/etc/postgresql/10/main/
+
+---------------------
+#конфигурационные файлы
+
+#главный конфигурационный файл
+postgresql.conf
+#файл определяющий настрйку доступа
+#Доступ есть только у пользователя postgres
+pg_hba.conf
+#параметры автозапуска postgresql
+start.conf 
+
+---------------------
+#Фаил логов
+/var/log/postgresql/postgresql-10-main.log
+
+#grand permission for postgres user
+sudo chown postgres /usr/local/pgdata/data/
+echo @PGDATA /usr/local/pgsql/data/
+
+echo @PATH
+/usr/local/pgdata/bin:/home/postgres/bin:home/postgres/.local/bin:/usr/local/sbin:/usr/local/
+bin/:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin:/snap/bin
+
+#availlable extensions in PostgreSQL
+psql -c 'SELECT name, comment FROM pg_available_extensions;'
+
+#start postgres on specified port
+/usr/lib/postgresql/10/bin/pg_ctl -D -o "-p 5433"  /home/akatruk/postgres/ -l logfile start
+
+#installed postgres on VM
+apt-get install net-tools
+netstat -tulpn | grep postgres
+
+
+## Before instalation postgres
+# sudo mkdir /usr/local/var/postgres
+# sudo chmod 775 /usr/local/var/postgres
+# sudo chown postgres /usr/local/var/postgres
+# initdb /usr/local/var/postgres
+# sudo chown wdurant /usr/local/var/postgres
+
