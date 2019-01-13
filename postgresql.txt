@@ -28,9 +28,18 @@ bin/:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin:/snap/bin
 psql -c 'SELECT name, comment FROM pg_available_extensions;'
 
 #start postgres on specified port
-/usr/lib/postgresql/10/bin/pg_ctl -D -o "-p 5433"  /home/akatruk/postgres/ -l logfile start
+/usr/lib/postgresql/10/bin/initdb /home/akatruk/postgres/
+/usr/lib/postgresql/10/bin/pg_ctl -D /home/akatruk/postgres/ -l logfile start
+/usr/lib/postgresql/10/bin/pg_ctl -D /home/akatruk/postgres/ -l logfile start -o "-p 5433"
 
-#installed postgres on VM
+#connect to specifi
+psql -p 5433
+
+#view variables on specific user
+env
+
+
+#install netstat for chech installed postgres
 apt-get install net-tools
 netstat -tulpn | grep postgres
 
