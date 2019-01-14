@@ -7,6 +7,8 @@ cp
 #file information
 file
 
+#disable caps-service
+sudo service cups-browsed stop
 
 #list files in directory
 l or ll or dir or ls or ls -la
