@@ -3,7 +3,7 @@
 wget http://repo.postgrespro.ru/pgpro-11/src/postgrespro-standard-11.1.1.tar.bz2 /home/akatruk/Downloads/
 
 #add utilities
-apt-get install gcc libreadline-dev bzip2 zlib1g-dev make
+apt install postgresql-client-common gcc libreadline-dev bzip2 zlib1g-dev make
 
 #unpacked file
 cd /home/akatruk/Downloads/
