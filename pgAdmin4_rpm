@@ -1,0 +1,53 @@
+#Download and install yum
+yum -y install https://download.postgresql.org/pub/repos/yum/11/redhat/rhel-7-x86_64/pgdg-centos11-11-2.noarch.rpm
+yum -y install pgadmin4
+
+#Configure config file
+mv /etc/httpd/conf.d/pgadmin4.conf.sample /etc/httpd/conf.d/pgadmin4.conf
+
+#Check config file
+cat /etc/httpd/conf.d/pgadmin4.conf
+
+#Create needed directory
+mkdir -p /var/lib/pgadmin4/
+mkdir -p /var/log/pgadmin4/
+chown -R apache:apache /var/lib/pgadmin4
+chown -R apache:apache /var/log/pgadmin4
+
+#configure installation config
+vi /usr/lib/python2.7/site-packages/pgadmin4-web/config_distro.py
+
+#Add rows
+LOG_FILE = '/var/log/pgadmin4/pgadmin4.log'
+SQLITE_PATH = '/var/lib/pgadmin4/pgadmin4.db'
+SESSION_DB_PATH = '/var/lib/pgadmin4/sessions'
+STORAGE_DIR = '/var/lib/pgadmin4/storage'
+
+#Run setup file and insert default email/passwd
+python /usr/lib/python2.7/site-packages/pgadmin4-web/setup.py
+
+#Run pgAdmin4
+python /usr/lib/python2.7/site-packages/pgadmin4-web/pgAdmin4.py
+
+#Run pgAdmin4 as service
+nohup python /usr/lib/python2.7/site-packages/pgadmin4-web/pgAdmin4.py &
+
+##Config of pgAdmin4
+##DEFAULT_SERVER = '10.80.73.32'
+##DEFAULT_SERVER_PORT = 15050
+
+##Configure firewall
+firewall-cmd --permanent --add-port=15050/tcp
+firewall-cmd --reload
+firewall-cmd --list-all
+
+#Daemon config pgAdmin
+#cat /etc/httpd/conf.d/pgadmin4.conf
+
+
+##If you forgot email/passwd to pgAdmin4 console
+#Remove file
+rm /var/lib/pgadmin/pgadmin4.db 
+
+#Configure email address again
+python /usr/lib/python2.7/site-packages/pgadmin4-web/setup.py
