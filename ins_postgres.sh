@@ -3,7 +3,7 @@
 wget http://repo.postgrespro.ru/pgpro-11/src/postgrespro-standard-11.1.1.tar.bz2 /home/akatruk/Downloads/
 
 #add utilities
-apt install postgresql-client-common gcc libreadline-dev bzip2 zlib1g-dev make
+apt install postgresql-client postgresql-client-common gcc libreadline-dev bzip2 zlib1g-dev make
 
 #unpacked file
 cd /home/akatruk/Downloads/
@@ -33,3 +33,6 @@ mkdir -p /u02/
 chown postgres /u02
 chmod 777 /u02
 
+mkdir /var/run/postgresql/
+chmod 777 /var/run/postgresql/
+chown postgres:postgres /var/run/postgresql/
