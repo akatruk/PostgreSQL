@@ -1,0 +1,22 @@
+#connect to specific database
+psql \test1
+
+#list all database
+\l
+
+#list all tables in database
+SELECT tablename, tableowner FROM pg_tables LIMIT 5;
+
+#information about connection
+\conninfo
+
+#psql variables
+\set
+EXAMPLE:
+\echo :curr_time
+
+/usr/lib/postgresql/10/bin/initdb /usr/local/var/postgres
+
+
+ALTER USER postgres WITH PASSWORD 'Vfhnvfhn123';
+
