@@ -35,3 +35,7 @@ lscpu | grep CPU
 
 #Amount of RAM
 lsmem
+
+#greap config
+awk '$1 ~ /^[^;#]/' smb.conf
+
