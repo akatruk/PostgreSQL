@@ -1,0 +1,44 @@
+##Extend partition
+#View all disks
+fdisk -l
+#View all partitions
+lsblk
+cat /proc/partitions
+#Chose specific disk
+fdisk /dev/sda
+#reconfigure all partitions
+partprobe -s
+pvcreate /dev/sda3
+vgextend /dev/mapper/centos-root /dev/sda3
+#Add free size
+lvextend -l+288 /dev/mapper/centos-root
+xfs_growfs /dev/mapper/centos-root
+https://stackoverflow.com/questions/26305376/resize2fs-bad-magic-number-in-super-block-while-trying-to-open
+
+##Delete existed disk
+#View all disks
+fdisk-l
+#View all partitions
+lsblk
+cat /proc/partitions
+#partprobe - inform the OS of partition table changes
+partprobe -s
+#Unmount disk
+unmount /dev/sdb
+
+
+##Create new disk
+#Create new partition by fdisk
+fdisk /dev/sda
+#Create folder for disk
+mkdir /disk1
+#Create new volume
+pvcreate /dev/sdb
+#Format in ext4
+mkfs.ext4 /dev/sdb
+#Mount new disk in /disk1
+mount /dev/sdb /disk1
+#Configure automount disk
+vi /etc/fstab
+/dev/sdb	/disk1	ext4	defaults 0 0
+
