@@ -1,8 +1,8 @@
-root\GCCrmI946@
+GCCrmI946@
  
 
 10.80.73.32
-t-pgsql-db01
+ssh root@t-pgsql-db01
 
 10.80.73.33
-t-pgsql-db02
+ssh root@t-pgsql-db02
