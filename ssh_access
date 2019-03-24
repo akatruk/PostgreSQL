@@ -6,3 +6,5 @@ ssh root@t-pgsql-db01
 
 10.80.73.33
 ssh root@t-pgsql-db02
+
+ssh 60065275@ubastion.adeo.com
