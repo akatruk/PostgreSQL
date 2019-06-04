@@ -1,18 +1,29 @@
-#install postgres from source
-wget http://repo.postgrespro.ru/pgpro-11/src/postgrespro-standard-11.1.1.tar.bz2 /home/akatruk/Download/
+###CentOS###
+###Add repository###
+## CentOS/RHEL - 7
+rpm -Uvh https://yum.postgresql.org/11/redhat/rhel-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm
 
-#unpacked file
-tar xvjf postgrespro-standard-11.1.1.tar.bz2
+## CentOS/RHEL - 6
+rpm -Uvh https://yum.postgresql.org/11/redhat/rhel-6-x86_64/pgdg-redhat-repo-latest.noarch.rpm
 
-#create directory for distributive
-mkdir /u01/psql/
+##install postgresql###
+#11
+yum -y install postgresql11 postgresql11-server postgresql11-contrib postgresql11-libs
 
-#prepare instalation postgres
-cd /home/akatruk/Download/
-./configure -prefix /u01/pgsql
+#10
+yum -y install postgresql10 postgresql10-server postgresql10-contrib postgresql10-libs
 
-#add utilities
-apt-get install gcc libreadline-dev
+###Directory with PGDATA###
+###PATH=directory with
+###postgresql.conf,pg_hba.conf, etc###
 
-#install postgres
-make install
+Place the below in your ~/.bashrc file.
+
+PATH=$PATH:"<FolderWith_initdb,pg_ctl>"
+export PATH
+export PGDATA="<FolderNameForPostgresDatabases>"
+
+###Add firewall###
+firewall-cmd --permanent --add-port=5432/tcp
+firewall-cmd --reload
+
