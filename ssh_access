@@ -1,3 +1,10 @@
+###Access by cert###
+.ssh/authorized_keys
+This directory should have 755 permissions and be owned by the user. Move the authorized_keys file into it. The authorized_keys file should have 644 permissions and be owned by the user.
+
+ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBF6nacqNcqGTaACbve9MeKX89OPb/Oav7FLyIdFAjuxga0vVe/nF1ZTibwsHL/2G/YzfbTQ+RGd9BSftgF42+bQ= akatruk@ubuntu
+
+
 GCCrmI946@
  
 
