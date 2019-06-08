@@ -16,17 +16,8 @@ ssh root@t-pgsql-db02
 
 ssh 60065275@ubastion.adeo.com
 
-ssh rootinfra@t-dq-as01
-ssh rootinfra@p-dq-as01
-
+rootinfra
 UEamAdJcOC$GT4SIU97Lo
-
-
-useradd postgres
-passwd postgres
-OEIGmer39J@!
-
-
 
 --------------
 jira_manager
@@ -45,3 +36,4 @@ woeighwoi4nv;sl$J(GOJM
 Kirill.Evstigneev@leroymerlin.ru
 opeajgri5h8INRBRvd
 
+ssh rootinfra@p-jira-db01

@@ -1,0 +1,25 @@
+host replication postgres 10.220.12.0/24 trust
+
+
+standby_mode = 'on'
+primary_conninfo = 'host=10.220.12.78 port=5432 user=postgres'
+trigger_file = '/var/lib/pgsql/prod/equeue/data/trigger'
+restore_command = 'cp /var/lib/pgsql/prod/equeue/wal_archive%f "%p"'
+
+#psql on master
+alter system set wal_level = hot_standby;
+alter system set max_wal_senders = 2;
+alter system set wal_keep_segments = 32;
+alter system set archive_mode = 'on';
+alter system set archive_command = 'cp %p /var/lib/pgsql/prod/equeue/wal_archive%f';
+
+#psql on slave
+alter system set hot_standby = 'on';
+
+
+psql -c "SELECT pg_start_backup('label', true)"
+rsync -a /var/lib/pgsql/prod/equeue/ postgres@10.220.12.79:/var/lib/pgsql/prod/equeue/ --exclude postmaster.pid
+psql -c "SELECT pg_stop_backup()"
+
+passwd postgres
+GNBRJ#oelmv4221@@

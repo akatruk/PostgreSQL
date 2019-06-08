@@ -7,3 +7,7 @@ SELECT relname, last_vacuum, last_autovacuum FROM pg_stat_user_tables;
 #Very useful queries
 https://gist.github.com/anvk/475c22cbca1edc5ce94546c871460fdd
 
+
+
+ru1000\60065275
+Freelive123
