@@ -42,3 +42,41 @@ mount /dev/sdb /disk1
 vi /etc/fstab
 /dev/sdb	/disk1	ext4	defaults 0 0
 
+git add remote origin git@github.com:https://github.com/akatruk/postgresql.git
+
+## list disks
+pvs 
+lsblk
+
+## create PV
+pvcreate /dev/sdc1
+
+#Display PV
+pvdisplay or pvs 
+
+# Create voluve group and add PV
+vgcreate data1 /dev/sdc1
+
+# Create new LVN
+lvcreate -n data1 -l 100%FREE data1
+
+# Add file system
+mkfs.ext4 /dev/data1/data1
+
+# Add disk to autostart
+/etc/fstab
+
+
+
+## Extend exisiting disk
+# 1. mount PV
+pvcreate /dev/sdd
+
+# 2. extend existing vg
+vgextend data1 /dev/sdd
+
+# 3. extend existing LVN
+lvextend /dev/data1/data1 -l +100%FREE
+
+# 4. Resize filesystem
+resize2fs /dev/data1/data1

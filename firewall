@@ -5,7 +5,7 @@ firewall-cmd --get-zones
 sudo firewall-cmd --zone=public --add-port=5000/tcp
 
 # Open specify port for internal zone
-firewall-cmd --permanent --add-port=9187/tcp
+firewall-cmd --permanent --add-port=5432/tcp
 
 # Reload configuration
 firewall-cmd --reload
