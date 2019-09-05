@@ -2,43 +2,15 @@
 SELECT nspname FROM pg_catalog.pg_namespace where nspname not like 'pg_toast%'
 and nspname not like 'pg%' order by nspname desc;
 
-
-
-
-
-## Find objects in database
-
-## Find specific schema
-SELECT nspname FROM pg_catalog.pg_namespace order by nspname where nspname like '%rms%';
-
-## List all tables in specific schema
-SELECT table_name FROM information_schema.tables WHERE table_schema='td_idwh1_bv_prod_009_pbsdbs_ods';
-
-
-SELECT table_name FROM information_schema.tables 
-WHERE table_schema='td_idwh1_bv_prod_009_pbsdbs_ods'
-and table_name like 'tf009_vte_ligticcai';
-
 SELECT table_name FROM information_schema.tables 
 WHERE table_schema='rms_p009qtzb_rms_ods'
 and table_name like '%item_master%';
 
-## How to grant privilege
-create role team_ga nologin;
-create role "60076294" login;         
-grant team_ga to "60076294"; 
-grant select on td_idwh1_bv_prod_009_pbsdbs_ods.tf009_vte_ligticcai to team_ga;
-grant select on rms_p009qtzb_rms_ods.item_master to team_ga;
-
-
-## Granted privilege
-SELECT table_catalog, table_schema, table_name, privilege_type
-FROM   information_schema.table_privileges 
-WHERE  grantee = 'team_ga';
-
 gpstate -b
 
-select hostname, port from gp_segment_configuration;
+## list segments
+select dbid, role, hostname, port from gp_segment_configuration order by dbid;
+
 psql -h d-dp-sdw01 -p 10001 -d adb
 
 select gp_segment_id, segno, tupcount, modcount, state from 
@@ -55,6 +27,8 @@ gpcheckcat
 
 dev
 10.80.55.18
+
+$MASTER_DATA_DIRECTORY/
 
 prod
 84.201.144.108
