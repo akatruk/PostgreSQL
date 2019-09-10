@@ -36,7 +36,7 @@ WHERE grantee::text in (select  unnest(rolname||
 FROM pg_catalog.pg_roles r
 WHERE r.rolname ='team_rms');
 
-
+GRANT CREATE TABLE TO rms_p009qtzb_rms_raw TO 'rms_p009qtzb_rms_raw';
 
 -- 
 do
@@ -55,7 +55,7 @@ begin
 		from
 			information_schema.tables
 		where
-			table_schema like 'rms_p009qtzb_rms_%'
+			table_schema like 'metadata%'
 	
 	loop
 		var_query_sql = 'grant select on ' ||var_table_name ||' to ' || var_role_name||';';
