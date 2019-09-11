@@ -1,7 +1,7 @@
 -- Grant privilege
 create role team_rms nologin;
 create role "60065275" login;         
-grant team_rms to "akatruk"; 
+grant team_rms to "60058193"; 
 grant ldap_users to "akatruk"; 
 grant select on td_idwh1_bv_prod_009_pbsdbs_raw to team_rms;
 grant select on rms_p009qtzb_rms_ods.item_master to team_ga;
@@ -58,7 +58,7 @@ begin
 			table_schema like 'metadata%'
 	
 	loop
-		var_query_sql = 'grant select on ' ||var_table_name ||' to ' || var_role_name||';';
+		var_query_sql = 'grant delete on ' ||var_table_name ||' to ' || var_role_name||';';
 	    
 		begin
 	        execute var_query_sql;
@@ -72,3 +72,11 @@ begin
 end;
 $$
 language 'plpgsql';
+
+GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA metadata TO team_rms;
+
+GRANT USAGE, SELECT ON tbl_scd4_table_list_id_table_seq TO team_rms;
+
+
+-- Grant all sequence
+grant ALL PRIVILEGES ON SEQUENCE metadata.tbl_scd4_loads_id_load_seq to team_rms;
