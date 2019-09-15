@@ -1,3 +1,5 @@
+https://community.pivotal.io/s/article/Identify-Tables-that-Need-Vacuum-Analyze
+
 -- check tables on bloat
 SELECT * FROM gp_toolkit.gp_bloat_diag;
 
