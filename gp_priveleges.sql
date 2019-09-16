@@ -1,8 +1,8 @@
 -- Grant privilege
 create role team_rms nologin;
-create role "60065275" login;         
-grant team_rms to "60058193"; 
-grant ldap_users to "akatruk"; 
+create role "p-pallet-usr-1" login;         
+grant team_rms to "p-pallet-usr-1"; 
+grant ldap_users to "p-pallet-usr-1"; 
 grant select on td_idwh1_bv_prod_009_pbsdbs_raw to team_rms;
 grant select on rms_p009qtzb_rms_ods.item_master to team_ga;
 -- Grant privilege on schema
@@ -34,7 +34,7 @@ WHERE grantee::text in (select  unnest(rolname||
         JOIN pg_catalog.pg_roles b ON (m.roleid = b.oid)
         WHERE m.member = r.oid))::text
 FROM pg_catalog.pg_roles r
-WHERE r.rolname ='team_rms');
+WHERE r.rolname ='p-pallet-usr-1');
 
 GRANT CREATE TABLE TO rms_p009qtzb_rms_raw TO 'rms_p009qtzb_rms_raw';
 

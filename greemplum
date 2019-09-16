@@ -43,3 +43,6 @@ LMSuperPa$$1
 
 
 alter table crm_o_crm_dbag_lm_mscrm_dbo_raw.h_lmr_regionbase SET WITH (REORGANIZE=true)
+
+
+84.201.144.108
