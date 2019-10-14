@@ -22,6 +22,7 @@ echo "echo DBID: $dbid"
 echo "PGOPTIONS='-c gp_session_role=utility' psql -h $host -p $port -d template1 -c 'select 1;'"
 done > test.sh
 
+export PGPASSWORD='Vfhnvfhn!@#123'; psql -h '10.80.55.18' -U '60065275' -d 'adb'
 
 gpcheckcat
 
