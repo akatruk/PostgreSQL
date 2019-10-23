@@ -47,7 +47,7 @@ declare
 	var_query_sql text;
 
 begin	
-	var_role_name = '"team_rms"';
+	var_role_name = '"SA-PWRBI-DPL-CONN"';
 	
 	for var_table_name in   	
 		select
@@ -55,10 +55,10 @@ begin
 		from
 			information_schema.tables
 		where
-			table_schema like 'metadata%'
+			table_schema like 'qtn_test_all_collection_ods%'
 	
 	loop
-		var_query_sql = 'grant delete on ' ||var_table_name ||' to ' || var_role_name||';';
+		var_query_sql = 'grant select on ' ||var_table_name ||' to ' || var_role_name||';';
 	    
 		begin
 	        execute var_query_sql;
@@ -72,6 +72,11 @@ begin
 end;
 $$
 language 'plpgsql';
+
+
+
+
+
 
 GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA metadata TO team_rms;
 
