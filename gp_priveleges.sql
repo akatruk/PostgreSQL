@@ -47,7 +47,7 @@ declare
 	var_query_sql text;
 
 begin	
-	var_role_name = '"SA-PWRBI-DPL-CONN"';
+	var_role_name = '"60065275"';
 	
 	for var_table_name in   	
 		select
@@ -55,10 +55,10 @@ begin
 		from
 			information_schema.tables
 		where
-			table_schema like 'qtn_test_all_collection_ods%'
+			 table_schema like 'public%'
 	
 	loop
-		var_query_sql = 'grant select on ' ||var_table_name ||' to ' || var_role_name||';';
+		var_query_sql = 'grant select, update, insert on ' ||var_table_name ||' to ' || var_role_name||';';
 	    
 		begin
 	        execute var_query_sql;
