@@ -69,3 +69,16 @@ END LOOP;
 END
 $$ language plpgsql;
 
+
+
+
+
+drop table if exists temp_a;
+create temp table temp_a;
+insert into temp_a 
+select ctime, tmid, ssid, ccnt, username, db, cost, tsubmit, tstart, tfinish, status, rows_out, cpu_elapsed, cpu_currpct, skew_cpu, skew_rows, query_hash, query_text, query_plan, application_name, rsqname, rqppriority
+from queries_history as qh   
+WHERE  ctime > now() - interval '5 minutes';
+select *
+from temp_a;
+

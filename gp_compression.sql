@@ -19,3 +19,5 @@ ORDER BY sotdtablename;
 
 
 SELECT pg_size_pretty(pg_relation_size('public.test_compression'));
+
+/usr/lib/gpdb/bin/pg_dump -h 10.80.55.7 -U lm_user -t td_idwh1_bv_prod_009_pbsdbs_ods.tf009_vte_ligticcai_hist adb -Fp | psql -d adb

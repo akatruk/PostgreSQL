@@ -32,6 +32,7 @@ dev
 $MASTER_DATA_DIRECTORY/
 
 
+
 prod
 84.201.144.108
 lm_user
@@ -41,9 +42,6 @@ RDnMXBLz
 10.80.55.18
 leroy
 LMSuperPa$$1
-
-
-alter table crm_o_crm_dbag_lm_mscrm_dbo_raw.h_lmr_regionbase SET WITH (REORGANIZE=true)
 
 
 84.201.144.108
