@@ -29,3 +29,5 @@ END
 $$ language plpgsql;
 
 ------------- 3. explain cursor & insert into public.query_history_cost ---------
+
+/usr/pgsql-11/bin/initdb -D /var/lib/pgsql/dev/qt/data

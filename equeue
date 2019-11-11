@@ -1,15 +1,22 @@
+useradd postgres
+passwd postgres
+test123!@#Test
+
+
 {
 mkdir -p /var/lib/pgsql
 cd /var/lib/pgsql
-mkdir -p test/equeue/data
-mkdir -p test/equeue/conf
-mkdir -p test/equeue/wal_archive
-chown -R postgres:postgres test
-ls -ld /var/lib/pgsql/test/equeue/data
-ls -ld /var/lib/pgsql/test/equeue/conf
-ls -ld /var/lib/pgsql/test/equeue/wal_archive
+mkdir -p dev/leroymerlin/data
+mkdir -p dev/leroymerlin/conf
+mkdir -p dev/leroymerlin/wal_archive 
+chown -R postgres:postgres dev
+ls -ld /var/lib/pgsql/dev/leroymerlin/data
+ls -ld /var/lib/pgsql/dev/leroymerlin/conf
+ls -ld /var/lib/pgsql/dev/leroymerlin/wal_archive
 }
 
+mkdir /data/
+chown -R postgres:postgres //data/db/
 
 rpm -Uvh https://yum.postgresql.org/11/redhat/rhel-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm
 
@@ -22,39 +29,45 @@ yum -y remove postgresql11 postgresql11-server postgresql11-contrib postgresql11
 yum -y install postgresql11 postgresql11-server postgresql11-contrib postgresql11-libs
 <Complete!>
 
-3. Установка
-/usr/pgsql-11/bin/initdb -D /var/lib/pgsql/test/equeue/data
-/usr/pgsql-11/bin/pg_ctl -D /var/lib/pgsql/test/equeue/data -l logfile start
+yum -y install rsync
 
+3. Установка (as postgres)
+/usr/pgsql-11/bin/initdb -D /var/lib/pgsql/dev/leroymerlin/data
+/usr/pgsql-11/bin/pg_ctl -D /var/lib/pgsql/dev/leroymerlin/data -l logfile start
+
+/usr/pgsql-11/bin/initdb -D /data/
+/usr/pgsql-11/bin/pg_ctl -D start
 
 
 as root@postgres1s:
 
 {
-cat /lib/systemd/system/postgresql-11.service > /usr/lib/systemd/system/postgresql11_equeue.service
-sed -i 's/Environment=PGDATA=\/var\/lib\/pgsql\/11\/data\//Environment=PGDATA=\/var\/lib\/pgsql\/test\/equeue\/conf\//' /usr/lib/systemd/system/postgresql11_equeue.service
-sed -i 's/ExecStartPre=\/usr\/pgsql-11\/bin\/postgresql-11-check-db-dir \${PGDATA}/ExecStartPre=\/usr\/pgsql-11\/bin\/postgresql-11-check-db-dir \/var\/lib\/pgsql\/test\/equeue\/data\//' /usr/lib/systemd/system/postgresql11_equeue.service
-echo "Environment=PGPORT=5432" >> /usr/lib/systemd/system/postgresql11_equeue.service
-mv /var/lib/pgsql/test/equeue/data/pg_hba.conf /var/lib/pgsql/test/equeue/conf/pg_hba.conf
-mv /var/lib/pgsql/test/equeue/data/pg_ident.conf /var/lib/pgsql/test/equeue/conf/pg_ident.conf 
-mv /var/lib/pgsql/test/equeue/data/postgresql.conf /var/lib/pgsql/test/equeue/conf/postgresql.conf
+cat /lib/systemd/system/postgresql-11.service > /usr/lib/systemd/system/postgresql11_leroymerlin.service
+sed -i 's/Environment=PGDATA=\/var\/lib\/pgsql\/11\/data\//Environment=PGDATA=\/var\/lib\/pgsql\/dev\/leroymerlin\/conf\//' /usr/lib/systemd/system/postgresql11_leroymerlin.service
+sed -i 's/ExecStartPre=\/usr\/pgsql-11\/bin\/postgresql-11-check-db-dir \${PGDATA}/ExecStartPre=\/usr\/pgsql-11\/bin\/postgresql-11-check-db-dir \/var\/lib\/pgsql\/dev\/leroymerlin\/data\//' /usr/lib/systemd/system/postgresql11_leroymerlin.service
+echo "Environment=PGPORT=5432" >> /usr/lib/systemd/system/postgresql11_leroymerlin.service
+mv /var/lib/pgsql/dev/leroymerlin/data/pg_hba.conf /var/lib/pgsql/dev/leroymerlin/conf/pg_hba.conf
+mv /var/lib/pgsql/dev/leroymerlin/data/pg_ident.conf /var/lib/pgsql/dev/leroymerlin/conf/pg_ident.conf
+mv /var/lib/pgsql/dev/leroymerlin/data/postgresql.conf /var/lib/pgsql/dev/leroymerlin/conf/postgresql.conf
 }
+
+
 
 as postgres@<server>:
 {
-CONF_FILE=/var/lib/pgsql/test/equeue/conf/postgresql.conf
-PG_HBA=/var/lib/pgsql/test/equeue/conf/pg_hba.conf
-echo "data_directory = '/var/lib/pgsql/test/equeue/data/'
-max_connections = 300
-shared_buffers = 8GB
-effective_cache_size = 24GB
-maintenance_work_mem = 2GB
+CONF_FILE=/var/lib/pgsql/dev/leroymerlin/conf/postgresql.conf
+PG_HBA=/var/lib/pgsql/dev/leroymerlin/conf/pg_hba.conf
+echo "data_directory = '/var/lib/pgsql/dev/leroymerlin/data/'
+max_connections = 20
+shared_buffers = 128MB
+effective_cache_size = 384MB
+maintenance_work_mem = 32MB
 checkpoint_completion_target = 0.7
-wal_buffers = 16MB
+wal_buffers = 3932kB
 default_statistics_target = 100
 random_page_cost = 1.1
 effective_io_concurrency = 200
-work_mem = 13981kB
+work_mem = 3276kB
 max_worker_processes = 4
 max_parallel_workers_per_gather = 2
 max_parallel_workers = 4
@@ -68,7 +81,7 @@ wal_keep_segments = 100
 max_replication_slots = 10
 #hot_standby = on
 #archive_mode = on
-archive_command = 'test ! -f /var/lib/pgsql/test/equeue/wal_archive/%f && cp %p /var/lib/pgsql/test/equeue/wal_archive/%f'
+archive_command = 'dev ! -f /var/lib/pgsql/dev/leroymerlin/wal_archive/%f && cp %p /var/lib/pgsql/dev/leroymerlin/wal_archive/%f'
 
 min_wal_size = 1GB
 max_wal_size = 2GB
@@ -109,12 +122,20 @@ echo "export PATH=/usr/pgsql-11/bin:\$PATH" >> $HOME/.bash_profile
 
 
 {
-systemctl enable postgresql11_equeue.service
-systemctl restart postgresql11_equeue.service
+systemctl enable postgresql11_leroymerlin.service
+systemctl restart postgresql11_leroymerlin.service
 ps -ef |egrep "postg|pgbo"
 }
 
-rsync -a /var/lib/pgsql/test/equeue/ postgres@10.220.12.79:/var/lib/pgsql/test/equeue/ --exclude postmaster.pid
+rsync -a /var/lib/pgsql/dev/leroymerlin/ postgres@10.220.12.79:/var/lib/pgsql/dev/leroymerlin/ --exclude postmaster.pid
 
 passwd postgres
 GNBRJ#oelmv4221@@
+
+
+
+
+----------
+#replication 
+
+rsync -a /var/lib/pgsql/dev/leroymerlin/data/ 10.80.134.24:/var/lib/pgsql/dev/leroymerlin/data/ --exclude postmaster.pid
