@@ -6,68 +6,56 @@ test123!@#Test
 {
 mkdir -p /var/lib/pgsql
 cd /var/lib/pgsql
-mkdir -p dev/leroymerlin/data
-mkdir -p dev/leroymerlin/conf
-mkdir -p dev/leroymerlin/wal_archive 
-chown -R postgres:postgres dev
-ls -ld /var/lib/pgsql/dev/leroymerlin/data
-ls -ld /var/lib/pgsql/dev/leroymerlin/conf
-ls -ld /var/lib/pgsql/dev/leroymerlin/wal_archive
+mkdir -p test/project/data
+mkdir -p test/project/conf
+mkdir -p test/project/wal_archive
+chown -R postgres:postgres test
+ls -ld /var/lib/pgsql/test/project/data
+ls -ld /var/lib/pgsql/test/project/conf
+ls -ld /var/lib/pgsql/test/project/wal_archive
 }
 
-mkdir /data/
-chown -R postgres:postgres //data/db/
+yum -y install https://download.postgresql.org/pub/repos/yum/10/redhat/rhel-7-x86_64/pgdg-centos10.noarch.rpm
+yum list |egrep -i "postgresql10|postgresql10-server|postgresql10-contrib|postgresql10-libs"
+yum -y install postgresql10 postgresql10-server postgresql10-contrib postgresql10-libs
 
-rpm -Uvh https://yum.postgresql.org/11/redhat/rhel-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm
-
-yum -y install https://download.postgresql.org/pub/repos/yum/11/redhat/rhel-7-x86_64/pgdg-centos11.noarch.rpm
-yum list |egrep -i "postgresql11|postgresql11-server|postgresql11-contrib|postgresql11-libs"
-<list packages>
-
-yum -y remove postgresql11 postgresql11-server postgresql11-contrib postgresql11-libs
-
-yum -y install postgresql11 postgresql11-server postgresql11-contrib postgresql11-libs
-<Complete!>
-
-yum -y install rsync
 
 3. Установка (as postgres)
-/usr/pgsql-11/bin/initdb -D /var/lib/pgsql/dev/leroymerlin/data
-/usr/pgsql-11/bin/pg_ctl -D /var/lib/pgsql/dev/leroymerlin/data -l logfile start
-
-/usr/pgsql-11/bin/initdb -D /data/
-/usr/pgsql-11/bin/pg_ctl -D start
-
+/usr/pgsql-10/bin/initdb -D /var/lib/pgsql/test/project/data
+/usr/pgsql-10/bin/pg_ctl -D /var/lib/pgsql/test/project/data -l logfile start
 
 as root@postgres1s:
 
 {
-cat /lib/systemd/system/postgresql-11.service > /usr/lib/systemd/system/postgresql11_leroymerlin.service
-sed -i 's/Environment=PGDATA=\/var\/lib\/pgsql\/11\/data\//Environment=PGDATA=\/var\/lib\/pgsql\/dev\/leroymerlin\/conf\//' /usr/lib/systemd/system/postgresql11_leroymerlin.service
-sed -i 's/ExecStartPre=\/usr\/pgsql-11\/bin\/postgresql-11-check-db-dir \${PGDATA}/ExecStartPre=\/usr\/pgsql-11\/bin\/postgresql-11-check-db-dir \/var\/lib\/pgsql\/dev\/leroymerlin\/data\//' /usr/lib/systemd/system/postgresql11_leroymerlin.service
-echo "Environment=PGPORT=5432" >> /usr/lib/systemd/system/postgresql11_leroymerlin.service
-mv /var/lib/pgsql/dev/leroymerlin/data/pg_hba.conf /var/lib/pgsql/dev/leroymerlin/conf/pg_hba.conf
-mv /var/lib/pgsql/dev/leroymerlin/data/pg_ident.conf /var/lib/pgsql/dev/leroymerlin/conf/pg_ident.conf
-mv /var/lib/pgsql/dev/leroymerlin/data/postgresql.conf /var/lib/pgsql/dev/leroymerlin/conf/postgresql.conf
+cat /lib/systemd/system/postgresql-10.service > /usr/lib/systemd/system/postgresql10_project.service
+sed -i 's/Environment=PGDATA=\/var\/lib\/pgsql\/10\/data\//Environment=PGDATA=\/var\/lib\/pgsql\/test\/project\/conf\//' /usr/lib/systemd/system/postgresql10_project.service
+sed -i 's/ExecStartPre=\/usr\/pgsql-10\/bin\/postgresql-10-check-db-dir \${PGDATA}/ExecStartPre=\/usr\/pgsql-10\/bin\/postgresql-10-check-db-dir \/var\/lib\/pgsql\/test\/project\/data\//' /usr/lib/systemd/system/postgresql10_project.service
+echo "Environment=PGPORT=5432" >> /usr/lib/systemd/system/postgresql10_project.service
+mv /var/lib/pgsql/test/project/data/pg_hba.conf /var/lib/pgsql/test/project/conf/pg_hba.conf
+mv /var/lib/pgsql/test/project/data/pg_ident.conf /var/lib/pgsql/test/project/conf/pg_ident.conf
+mv /var/lib/pgsql/test/project/data/postgresql.conf /var/lib/pgsql/test/project/conf/postgresql.conf
 }
 
 
+Добавили в .bash_profile:
+
+export PATH=/usr/pgsql-10/bin:$PATH
 
 as postgres@<server>:
 {
-CONF_FILE=/var/lib/pgsql/dev/leroymerlin/conf/postgresql.conf
-PG_HBA=/var/lib/pgsql/dev/leroymerlin/conf/pg_hba.conf
-echo "data_directory = '/var/lib/pgsql/dev/leroymerlin/data/'
-max_connections = 20
-shared_buffers = 128MB
-effective_cache_size = 384MB
-maintenance_work_mem = 32MB
+CONF_FILE=/var/lib/pgsql/test/project/conf/postgresql.conf
+PG_HBA=/var/lib/pgsql/test/project/conf/pg_hba.conf
+echo "data_directory = '/var/lib/pgsql/test/project/data/'
+max_connections = 300
+shared_buffers = 8GB
+effective_cache_size = 24GB
+maintenance_work_mem = 2GB
 checkpoint_completion_target = 0.7
-wal_buffers = 3932kB
+wal_buffers = 16MB
 default_statistics_target = 100
 random_page_cost = 1.1
 effective_io_concurrency = 200
-work_mem = 3276kB
+work_mem = 13981kB
 max_worker_processes = 4
 max_parallel_workers_per_gather = 2
 max_parallel_workers = 4
@@ -81,7 +69,7 @@ wal_keep_segments = 100
 max_replication_slots = 10
 #hot_standby = on
 #archive_mode = on
-archive_command = 'dev ! -f /var/lib/pgsql/dev/leroymerlin/wal_archive/%f && cp %p /var/lib/pgsql/dev/leroymerlin/wal_archive/%f'
+archive_command = 'test ! -f /var/lib/pgsql/test/project/wal_archive/%f && cp %p /var/lib/pgsql/test/project/wal_archive/%f'
 
 min_wal_size = 1GB
 max_wal_size = 2GB
@@ -114,18 +102,22 @@ log_temp_files = 0
 log_autovacuum_min_duration = 0
 log_error_verbosity = default
 #log_duration = on" >> $CONF_FILE
-echo "host all all 0.0.0.0/0 md5
+echo "host all all <server>/32 md5
 host all all 127.0.0.1/32 trust" >> $PG_HBA
-echo "export PATH=/usr/pgsql-11/bin:\$PATH" >> $HOME/.bash_profile
+echo "export PATH=/usr/pgsql-10/bin:\$PATH" >> $HOME/.bash_profile
 }
 
 
 
 {
-systemctl enable postgresql11_leroymerlin.service
-systemctl restart postgresql11_leroymerlin.service
+systemctl restart postgresql10_project.service
+systemctl enable postgresql10_project.service
 ps -ef |egrep "postg|pgbo"
 }
+
+
+
+
 
 rsync -a /var/lib/pgsql/dev/leroymerlin/ postgres@10.220.12.79:/var/lib/pgsql/dev/leroymerlin/ --exclude postmaster.pid
 
@@ -139,3 +131,19 @@ GNBRJ#oelmv4221@@
 #replication 
 
 rsync -a /var/lib/pgsql/dev/leroymerlin/data/ 10.80.134.24:/var/lib/pgsql/dev/leroymerlin/data/ --exclude postmaster.pid
+
+
+
+max_connections = 20
+shared_buffers = 128MB
+effective_cache_size = 384MB
+maintenance_work_mem = 32MB
+checkpoint_completion_target = 0.7
+wal_buffers = 3932kB
+default_statistics_target = 100
+random_page_cost = 1.1
+effective_io_concurrency = 200
+work_mem = 3276kB
+max_worker_processes = 4
+max_parallel_workers_per_gather = 2
+max_parallel_workers = 4
