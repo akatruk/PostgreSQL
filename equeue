@@ -3,59 +3,42 @@ passwd postgres
 test123!@#Test
 
 
+
 {
 mkdir -p /var/lib/pgsql
 cd /var/lib/pgsql
 mkdir -p test/project/data
-mkdir -p test/project/conf
-mkdir -p test/project/wal_archive
 chown -R postgres:postgres test
-ls -ld /var/lib/pgsql/test/project/data
-ls -ld /var/lib/pgsql/test/project/conf
-ls -ld /var/lib/pgsql/test/project/wal_archive
 }
 
-yum -y install https://download.postgresql.org/pub/repos/yum/10/redhat/rhel-7-x86_64/pgdg-centos10.noarch.rpm
-yum list |egrep -i "postgresql10|postgresql10-server|postgresql10-contrib|postgresql10-libs"
-yum -y install postgresql10 postgresql10-server postgresql10-contrib postgresql10-libs
+yum -y install https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm
+yum list |egrep -i "postgresql11|postgresql11-server|postgresql11-contrib|postgresql11-libs"
+yum -y install postgresql11 postgresql11-server postgresql11-contrib postgresql11-libs
 
 
 3. Установка (as postgres)
-/usr/pgsql-10/bin/initdb -D /var/lib/pgsql/test/project/data
-/usr/pgsql-10/bin/pg_ctl -D /var/lib/pgsql/test/project/data -l logfile start
-
-as root@postgres1s:
-
-{
-cat /lib/systemd/system/postgresql-10.service > /usr/lib/systemd/system/postgresql10_project.service
-sed -i 's/Environment=PGDATA=\/var\/lib\/pgsql\/10\/data\//Environment=PGDATA=\/var\/lib\/pgsql\/test\/project\/conf\//' /usr/lib/systemd/system/postgresql10_project.service
-sed -i 's/ExecStartPre=\/usr\/pgsql-10\/bin\/postgresql-10-check-db-dir \${PGDATA}/ExecStartPre=\/usr\/pgsql-10\/bin\/postgresql-10-check-db-dir \/var\/lib\/pgsql\/test\/project\/data\//' /usr/lib/systemd/system/postgresql10_project.service
-echo "Environment=PGPORT=5432" >> /usr/lib/systemd/system/postgresql10_project.service
-mv /var/lib/pgsql/test/project/data/pg_hba.conf /var/lib/pgsql/test/project/conf/pg_hba.conf
-mv /var/lib/pgsql/test/project/data/pg_ident.conf /var/lib/pgsql/test/project/conf/pg_ident.conf
-mv /var/lib/pgsql/test/project/data/postgresql.conf /var/lib/pgsql/test/project/conf/postgresql.conf
-}
+/usr/pgsql-11/bin/initdb -D /var/lib/pgsql/test/project/data
+/usr/pgsql-11/bin/pg_ctl -D /var/lib/pgsql/test/project/data -l logfile start
 
 
 Добавили в .bash_profile:
 
-export PATH=/usr/pgsql-10/bin:$PATH
-
-as postgres@<server>:
+c
+as postgres@10.80.134.24:
 {
-CONF_FILE=/var/lib/pgsql/test/project/conf/postgresql.conf
-PG_HBA=/var/lib/pgsql/test/project/conf/pg_hba.conf
+CONF_FILE=/var/lib/pgsql/test/project/postgresql.conf
+PG_HBA=/var/lib/pgsql/test/project/pg_hba.conf
 echo "data_directory = '/var/lib/pgsql/test/project/data/'
-max_connections = 300
-shared_buffers = 8GB
-effective_cache_size = 24GB
-maintenance_work_mem = 2GB
+max_connections = 20
+shared_buffers = 128MB
+effective_cache_size = 384MB
+maintenance_work_mem = 32MB
 checkpoint_completion_target = 0.7
-wal_buffers = 16MB
-default_statistics_target = 100
+wal_buffers = 3932kB
+default_statistics_target = 110
 random_page_cost = 1.1
 effective_io_concurrency = 200
-work_mem = 13981kB
+work_mem = 3276kB
 max_worker_processes = 4
 max_parallel_workers_per_gather = 2
 max_parallel_workers = 4
@@ -64,9 +47,9 @@ wal_level = replica
 fsync = on
 wal_sync_method = fdatasync
 full_page_writes = on
-max_wal_senders = 10
-wal_keep_segments = 100
-max_replication_slots = 10
+max_wal_senders = 11
+wal_keep_segments = 110
+max_replication_slots = 11
 #hot_standby = on
 #archive_mode = on
 archive_command = 'test ! -f /var/lib/pgsql/test/project/wal_archive/%f && cp %p /var/lib/pgsql/test/project/wal_archive/%f'
@@ -79,13 +62,13 @@ checkpoint_timeout='30min'
 autovacuum = on
 autovacuum_analyze_scale_factor = 0.05
 autovacuum_analyze_threshold = 50
-autovacuum_max_workers = 10
+autovacuum_max_workers = 11
 autovacuum_naptime = 60
 autovacuum_vacuum_cost_delay = 20
 autovacuum_vacuum_cost_limit = -1
 autovacuum_vacuum_scale_factor = 0.01
 autovacuum_vacuum_threshold = 50
-vacuum_cost_limit = 1000
+vacuum_cost_limit = 1100
 
 ####logging####
 log_line_prefix = '%t [%p]: user=%u,db=%d,app=%a,client=%h '
@@ -102,24 +85,23 @@ log_temp_files = 0
 log_autovacuum_min_duration = 0
 log_error_verbosity = default
 #log_duration = on" >> $CONF_FILE
-echo "host all all <server>/32 md5
+echo "host all all 10.80.134.24/32 md5
 host all all 127.0.0.1/32 trust" >> $PG_HBA
-echo "export PATH=/usr/pgsql-10/bin:\$PATH" >> $HOME/.bash_profile
+echo "export PATH=/usr/pgsql-11/bin:\$PATH" >> $HOME/.bash_profile
 }
 
 
+ps -ef |egrep "postg|pgbo"
 
 {
-systemctl restart postgresql10_project.service
-systemctl enable postgresql10_project.service
+systemctl restart postgresql11_project.service
+systemctl enable postgresql11_project.service
 ps -ef |egrep "postg|pgbo"
 }
 
 
 
-
-
-rsync -a /var/lib/pgsql/dev/leroymerlin/ postgres@10.220.12.79:/var/lib/pgsql/dev/leroymerlin/ --exclude postmaster.pid
+rsync -a /var/lib/pgsql/dev/leroymerlin/ postgres@11.220.12.79:/var/lib/pgsql/dev/leroymerlin/ --exclude postmaster.pid
 
 passwd postgres
 GNBRJ#oelmv4221@@
@@ -130,7 +112,7 @@ GNBRJ#oelmv4221@@
 ----------
 #replication 
 
-rsync -a /var/lib/pgsql/dev/leroymerlin/data/ 10.80.134.24:/var/lib/pgsql/dev/leroymerlin/data/ --exclude postmaster.pid
+rsync -a /var/lib/pgsql/dev/leroymerlin/data/ 11.80.134.24:/var/lib/pgsql/dev/leroymerlin/data/ --exclude postmaster.pid
 
 
 
@@ -140,7 +122,7 @@ effective_cache_size = 384MB
 maintenance_work_mem = 32MB
 checkpoint_completion_target = 0.7
 wal_buffers = 3932kB
-default_statistics_target = 100
+default_statistics_target = 110
 random_page_cost = 1.1
 effective_io_concurrency = 200
 work_mem = 3276kB
