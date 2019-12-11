@@ -30,10 +30,16 @@ or
 echo 'listen_addresses = '*'' >> /var/lib/pgsql/test/project/data/postgresql.conf 
 
 6. Run command on slave node
-pg_basebackup -h 192.168.56.101 -D /var/lib/pgsql/test/project/data -R --slot=replica
+pg_basebackup -h 192.168.56.102 -D /var/lib/pgsql/test/project/data -R --slot=replica
 
 7. postgresql.conf on slave
 echo 'hot_standby = on' >> /var/lib/pgsql/test/project/data/postgresql.auto.conf
+
+###Check replication of PostgreSQL on slave
+select * from pg_stat_wal_receiver;
+
+###Check replication on master
+select usename,application_name,client_addr,backend_start,state,sync_state from pg_stat_replication ;
 
 ### Failover replication postgresql
 /usr/pgsql-11/bin/pg_ctl promote -D /var/lib/pgsql/test2/
@@ -47,4 +53,4 @@ ALTER USER postgres PASSWORD 'Vfhnvfhn123';
 3. Add on target server 
 echo "wal_log_hints = on" >> /var/lib/pgsql/test/project/data/postgresql.auto.conf
 4. Execut command
-/usr/pgsql-11/bin/pg_rewind -D /var/lib/pgsql/test/project/data/ --source-server="host=192.168.56.102 port=5432 user=postgres password=Vfhnvfhn123" -P
+/usr/pgsql-11/bin/pg_rewind -D /var/lib/pgsql/test/project/data/ --source-server="host=192.168.56.101 port=5432 user=postgres password=Vfhnvfhn123" -P

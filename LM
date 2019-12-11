@@ -1,8 +1,0 @@
-
-#SMB shares LM
-\\hq\dfsclip\IT_APPS
-\\prufs02\IT_APPS
-\\prufs02\LM_APPS
-
-#backups
-\\pruhpesox1b\
