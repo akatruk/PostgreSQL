@@ -16,10 +16,8 @@ make USE_PGXS=1
 sudo make USE_PGXS=1 install
 make USE_PGXS=1 installcheck
 psql postgres -c "CREATE EXTENSION pg_wait_sampling;"
-
-
-
+psql postgres -c "alter system set shared_preload_libraries = 'pg_wait_sampling';"
 
 chown -R postgres:postgres /usr/pgsql-11/
 
-
+https://github.com/postgrespro/pg_wait_sampling/commit/34e9e4774705b41f0f193b9603ce2d053fddc49e

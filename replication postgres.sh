@@ -31,6 +31,7 @@ echo 'listen_addresses = '*'' >> /var/lib/pgsql/test/project/data/postgresql.con
 
 6. Run command on slave node
 pg_basebackup -h 192.168.56.102 -D /var/lib/pgsql/test/project/data -R --slot=replica
+pg_basebackup -h 192.168.56.5 --wal-method=none --format=tar --pgdata=/var/lib/postgresql/backup
 
 7. postgresql.conf on slave
 echo 'hot_standby = on' >> /var/lib/pgsql/test/project/data/postgresql.auto.conf

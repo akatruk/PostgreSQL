@@ -14,9 +14,9 @@ fi
 if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
-export PG_HOME=/u01
+export PG_HOME=/usr/pgsql-11/bin/
 
-export PGDATA=/u02
+export PGDATA=/var/lib/pgsql/test/project/data/
 pglog=$PG_HOME/pg.log
 PATH=$PATH:$PG_HOME/bin
 

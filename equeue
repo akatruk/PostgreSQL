@@ -26,8 +26,8 @@ yum -y install postgresql11 postgresql11-server postgresql11-contrib postgresql1
 c
 as postgres@10.80.134.24:
 {
-CONF_FILE=/var/lib/pgsql/test/project/postgresql.conf
-PG_HBA=/var/lib/pgsql/test/project/pg_hba.conf
+CONF_FILE=/var/lib/pgsql/test/project/data/postgresql.conf
+PG_HBA=/var/lib/pgsql/test/project/data/pg_hba.conf
 echo "data_directory = '/var/lib/pgsql/test/project/data/'
 max_connections = 20
 shared_buffers = 128MB
@@ -51,8 +51,8 @@ max_wal_senders = 11
 wal_keep_segments = 110
 max_replication_slots = 11
 #hot_standby = on
-#archive_mode = on
-archive_command = 'test ! -f /var/lib/pgsql/test/project/wal_archive/%f && cp %p /var/lib/pgsql/test/project/wal_archive/%f'
+archive_mode = on
+archive_command = 'test ! -f /var/lib/pgsql/test/project/data/wal_archive/%f && cp %p /var/lib/pgsql/test/project/data/wal_archive/%f'
 
 min_wal_size = 1GB
 max_wal_size = 2GB
@@ -76,16 +76,16 @@ logging_collector = on
 log_directory = 'log'
 log_filename = 'postgresql-%Y%m%d_%H%M.log'
 log_rotation_age = 360
-#log_min_duration_statement = 0
+log_min_duration_statement = 0
 log_checkpoints = on
-#log_connections = on
-#log_disconnections = on
+log_connections = on
+log_disconnections = on
 log_lock_waits = on
 log_temp_files = 0
 log_autovacuum_min_duration = 0
 log_error_verbosity = default
 #log_duration = on" >> $CONF_FILE
-echo "host all all 10.80.134.24/32 md5
+echo "host all all 192.168.56.0/32 md5
 host all all 127.0.0.1/32 trust" >> $PG_HBA
 echo "export PATH=/usr/pgsql-11/bin:\$PATH" >> $HOME/.bash_profile
 }
