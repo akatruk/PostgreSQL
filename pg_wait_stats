@@ -1,0 +1,25 @@
+https://github.com/postgrespro/pg_wait_sampling
+
+as root:
+chown -R postgres:postgres /usr/pgsql-11/
+yum -y install git postgresql11-devel gcc centos-release-scl devtoolset-7 llvm-toolset-7
+mkdir -p /usr/lib64/llvm5.0
+mkdir -p /usr/lib64/llvm5.0/bin
+cd /usr/lib64/llvm5.0/bin
+ln -s /opt/rh/llvm-toolset-7/root/usr/bin/llvm-lto
+
+
+as postgres:
+git clone https://github.com/postgrespro/pg_wait_sampling.git
+cd pg_wait_sampling
+make USE_PGXS=1
+sudo make USE_PGXS=1 install
+make USE_PGXS=1 installcheck
+psql postgres -c "CREATE EXTENSION pg_wait_sampling;"
+
+
+
+
+chown -R postgres:postgres /usr/pgsql-11/
+
+
