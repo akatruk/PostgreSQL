@@ -2,12 +2,13 @@ https://github.com/postgrespro/pg_wait_sampling
 
 as root:
 chown -R postgres:postgres /usr/pgsql-11/
-yum -y install git postgresql11-devel gcc centos-release-scl devtoolset-7 llvm-toolset-7
+yum -y install git postgresql11-devel gcc centos-release-scl libicu-devel devtoolset-7 llvm-toolset-7
 mkdir -p /usr/lib64/llvm5.0
 mkdir -p /usr/lib64/llvm5.0/bin
 cd /usr/lib64/llvm5.0/bin
 ln -s /opt/rh/llvm-toolset-7/root/usr/bin/llvm-lto
 
+yum -y install git postgresql11-devel gcc centos-release-scl libicu-devel devtoolset-7 llvm-toolset-7
 
 as postgres:
 git clone https://github.com/postgrespro/pg_wait_sampling.git
@@ -21,3 +22,6 @@ psql postgres -c "alter system set shared_preload_libraries = 'pg_wait_sampling'
 chown -R postgres:postgres /usr/pgsql-11/
 
 https://github.com/postgrespro/pg_wait_sampling/commit/34e9e4774705b41f0f193b9603ce2d053fddc49e
+
+install postgresql11-server-dev-all
+postgresql11-common
