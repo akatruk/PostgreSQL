@@ -19,3 +19,4 @@ With that understanding, let’s take a look at the results of this first test.
 pgbench -c 10 -j 2 -t 10000 example
 
 
+pgbench -c 2 -j 2 -t 100 example
