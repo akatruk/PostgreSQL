@@ -1,0 +1,62 @@
+# Connections manger Bgbounce
+
+
+    1. Install:
+    yum -y install bgbouncer
+
+    all as root:
+{
+PB_INI=/etc/pgbouncer/pgbouncer.ini
+PB_ULIST=/etc/pgbouncer/userlist.txt
+echo "[databases]
+postgres= host=localhost port=5432 dbname=postgres
+example= host=localhost port=5432 dbname=example
+[pgbouncer]
+logfile = /var/log/pgbouncer/pgbouncer.log
+pidfile = /var/run/pgbouncer/pgbouncer.pid
+listen_addr = *
+listen_port = 6432
+auth_type = md5
+auth_file = /etc/pgbouncer/userlist.txt
+admin_users = postgres
+stats_users = postgres
+pool_mode = session
+server_reset_query = DISCARD ALL
+max_client_conn = 300
+default_pool_size = 280
+reserve_pool_size = 10
+reserve_pool_timeout = 5
+ignore_startup_parameters = extra_float_digits" >> $PB_INI
+touch $PB_ULIST
+chown postgres:postgres $PB_ULIST
+}
+
+or 
+
+auth_type = hba
+auth_hba_file = /var/lib/pgsql/test/project/data/pg_hba.conf
+
+    systemctl enable pgbouncer.service
+    systemctl start pgbouncer.service
+    firewall-cmd --permanent --add-port=5432/tcp
+    firewall-cmd --reload
+
+
+       2. Manage  pgbouncer  by  connecting  to the special administration database pgbouncer and
+          issuing show help; to begin:
+
+             $ psql -p 6543 -U someuser pgbouncer
+             pgbouncer=# show help;
+             NOTICE:  Console usage
+             DETAIL:
+               SHOW [HELP|CONFIG|DATABASES|FDS|POOLS|CLIENTS|SERVERS|SOCKETS|LISTS|VERSION]
+               SET key = arg
+               RELOAD
+               PAUSE
+               SUSPEND
+               RESUME
+               SHUTDOWN
+
+       If you made changes to the pgbouncer.ini file, you can reload it with:
+
+             pgbouncer=# RELOAD;
