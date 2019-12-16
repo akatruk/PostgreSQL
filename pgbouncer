@@ -17,7 +17,7 @@ pidfile = /var/run/pgbouncer/pgbouncer.pid
 listen_addr = *
 listen_port = 6432
 auth_type = hba
-auth_hba_file = /var/lib/pgsql/test/project/data/pg_hba.conf
+auth_hba_file = /etc/pgbouncer/pg_hba.conf
 auth_file = /etc/pgbouncer/userlist.txt
 admin_users = postgres
 stats_users = postgres
@@ -31,11 +31,6 @@ ignore_startup_parameters = extra_float_digits" >> $PB_INI
 touch $PB_ULIST
 chown postgres:postgres $PB_ULIST
 }
-
-or 
-
-auth_type = hba
-auth_hba_file = /var/lib/pgsql/test/project/data/pg_hba.conf
 
     systemctl enable pgbouncer.service
     systemctl start pgbouncer.service
@@ -62,6 +57,6 @@ auth_hba_file = /var/lib/pgsql/test/project/data/pg_hba.conf
 
              pgbouncer=# RELOAD;
 
-auth_type = hba
-auth_hba_file = /etc/pgbouncer/pg_hba.conf
-auth_file = /etc/pgbouncer/userlist.txt
+        Monitoring connectios
+
+        \SHOW POOLS;

@@ -17,6 +17,7 @@ fi
 export PG_HOME=/usr/pgsql-11/bin/
 
 export PGDATA=/var/lib/pgsql/test/project/data/
+export PATH="$PATH:/usr/pgsql-11/bin"
 pglog=$PG_HOME/pg.log
 PATH=$PATH:$PG_HOME/bin
-
+PATH=$PATH:/usr/pgsql-11/bin make
