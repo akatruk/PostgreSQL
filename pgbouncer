@@ -60,3 +60,36 @@ chown postgres:postgres $PB_ULIST
         Monitoring connectios
 
         \SHOW POOLS;
+
+---------------------------------------------------------------------
+
+### Pgbouncer docker container
+
+https://github.com/brainsam/pgbouncer
+
+
+Code Example
+You can configure it by Environment variables:
+
+$ docker run -d -p 1111:6432 \
+ --restart unless-stopped\
+ --name=test1 \
+ -e DB_HOST=192.168.56.11 \
+ -e DB_USER=test1 \
+ -e DB_PASSWORD=test1 \
+ brainsam/pgbouncer:latestsnop
+Or You can mount config file into docker container:
+
+docker run -d \
+ --name pgbouncer \
+ -v pgbouncer-config-file:/etc/pgbouncer/pgbouncer.ini \
+ brainsam/pgbouncer:latest
+
+# Installation
+docker pull brainsam/pgbouncer:latest
+
+Configuration
+All configuration parameters of pgbouncer are available both by --env (use the same keys in upper case) and by mounting pgbouncer.ini into container.
+
+Troubleshooting
+docker logs <your-pgbouncer-container-name>
