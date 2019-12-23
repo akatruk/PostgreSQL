@@ -34,7 +34,7 @@ chown postgres:postgres $PB_ULIST
 
     systemctl enable pgbouncer.service
     systemctl start pgbouncer.service
-    firewall-cmd --permanent --add-port=5432/tcp
+    firewall-cmd --permanent --add-port=6432/tcp
     firewall-cmd --reload
 
 
@@ -93,3 +93,16 @@ All configuration parameters of pgbouncer are available both by --env (use the s
 
 Troubleshooting
 docker logs <your-pgbouncer-container-name>
+
+
+
+
+
+
+
+
+
+
+
+
+

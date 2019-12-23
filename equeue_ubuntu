@@ -1,4 +1,4 @@
-useradd postgres
+useradd postgres -s /bin/bash -d /home/postgres/ -m
 passwd postgres
 test123!@#Test
 
@@ -9,14 +9,12 @@ mkdir -p test/project/data
 chown -R postgres:postgres test
 }
 
-yum -y install https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm
-yum list |egrep -i "postgresql11|postgresql11-server|postgresql11-contrib|postgresql11-libs"
-yum -y install postgresql11 postgresql11-server postgresql11-contrib postgresql11-libs
-
+apt -y install postgresql postgresql-contrib
 
 3. Установка (as postgres)
-/usr/pgsql-11/bin/initdb -D /var/lib/pgsql/test/project/data
-/usr/pgsql-11/bin/pg_ctl -D /var/lib/pgsql/test/project/data -l logfile start
+
+/usr/lib/postgresql/10/bin/initdb -D /var/lib/pgsql/test/project/data
+/usr/lib/postgresql/10/bin/pg_ctl -D /var/lib/pgsql/test/project/data -l logfile start
 
 
 Добавили в .bash_profile:
