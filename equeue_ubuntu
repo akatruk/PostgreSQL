@@ -19,7 +19,7 @@ apt -y install postgresql postgresql-contrib
 
 Добавили в .bash_profile:
 
-c
+
 as postgres@10.80.134.24:
 {
 CONF_FILE=/var/lib/pgsql/test/project/data/postgresql.conf
