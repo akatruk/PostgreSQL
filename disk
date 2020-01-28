@@ -79,4 +79,4 @@ vgextend data1 /dev/sdd
 lvextend /dev/data1/data1 -l +100%FREE
 
 # 4. Resize filesystem
-resize2fs /dev/data1/data1
+xfs_growfs /dev/centos/root

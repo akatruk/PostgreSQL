@@ -110,3 +110,36 @@ docker logs <your-pgbouncer-container-name>
 
 
 
+{
+PB_INI=/etc/pgbouncer/pgbouncer.ini
+PB_ULIST=/etc/pgbouncer/userlist.txt
+echo "[databases]
+ral= host=localhost port=5432 dbname=ral
+data_processing= host=localhost port=5432 dbname=data_processing
+gu= host=localhost port=5432 dbname=gu
+rssrds= host=localhost port=5432 dbname=rssrds
+objref= host=localhost port=5432 dbname=objref
+postgres= host=localhost port=5432 dbname=postgres
+users_migration= host=localhost port=5432 dbname=users_migration
+perfmon= host=localhost port=5432 dbname=perfmon
+register= host=localhost port=5432 dbname=register
+oa= host=localhost port=5432 dbname=oa
+[pgbouncer]
+logfile = /var/log/pgbouncer/pgbouncer.log
+pidfile = /var/run/pgbouncer/pgbouncer.pid
+listen_addr = *
+listen_port = 6432
+auth_type = md5
+auth_hba_file = /etc/pgbouncer/pg_hba.conf
+auth_file = /etc/pgbouncer/userlist.txt
+admin_users = postgres
+stats_users = postgres
+pool_mode = session
+server_reset_query = DISCARD ALL
+max_client_conn = 300
+default_pool_size = 280
+reserve_pool_size = 10
+reserve_pool_timeout = 5
+ignore_startup_parameters = extra_float_digits" >> $PB_INI
+chown postgres:postgres $PB_ULIST
+}

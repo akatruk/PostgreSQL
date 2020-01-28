@@ -10,5 +10,6 @@ firewall-cmd --permanent --add-port=5432/tcp
 # Reload configuration
 firewall-cmd --reload
 
-firewall-cmd --permanent --add-port=6432/tcp
+firewall-cmd --permanent --add-port=80/tcp
+firewall-cmd --permanent --add-port=3000/tcp
 firewall-cmd --reload
