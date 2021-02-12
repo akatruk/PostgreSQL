@@ -24,10 +24,10 @@ WHERE
     indexdef !~* 'unique'
 ORDER BY
     idstat.idx_scan DESC,
-    pg_relation_size(indexrelid) DESC
+    pg_relation_size(indexrelid) DESC;
 
 
-https://romantelychko.com/blog/319/
+-- https://romantelychko.com/blog/319/
 
 
 
