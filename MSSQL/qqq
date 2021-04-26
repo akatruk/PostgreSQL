@@ -1,0 +1,376 @@
+############################################################################
+# dtci-master - AWS Extend Switch Roles for dataservices-admin
+############################################################################
+
+[dtci-master]
+aws_account_id = dtci-master
+
+[dtci-master-dataservices-admin]
+role_arn = arn:aws:iam::306630887120:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = ff2600
+
+[orchtools-nonprod-dataservices-admin]
+role_arn = arn:aws:iam::709960895544:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = 00f900
+
+[orchtools-prod-dataservices-admin]
+role_arn = arn:aws:iam::326643230344:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = ff2600
+
+[espn-sdp-sb-dataservices-admin]
+role_arn = arn:aws:iam::617298345208:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = 00f900
+
+[espn-sdp-qa-dataservices-admin]
+role_arn = arn:aws:iam::224601549407:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = ff9300
+
+[espn-sdp-prod-dataservices-admin]
+role_arn = arn:aws:iam::958146458405:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = ff2600
+
+[espn-dp-sb-legacy-dataservices-admin]
+role_arn = arn:aws:iam::353129177806:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = 00f900
+
+[espn-cse-prod-dataservices-admin]
+role_arn = arn:aws:iam::330612370041:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = ff2600
+
+[espn-cse-qa-dataservices-admin]
+role_arn = arn:aws:iam::313726644801:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = ff9300
+
+[espn-cse-sb-dataservices-admin]
+role_arn = arn:aws:iam::731470219037:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = 00f900
+
+[metrics-sb-dataservices-admin]
+role_arn = arn:aws:iam::051291311226:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = 00f900
+
+[metrics-qa-dataservices-admin]
+role_arn = arn:aws:iam::941056435241:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = ff9300
+
+[metrics-prod-dataservices-admin]
+role_arn = arn:aws:iam::237550660596:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = ff2600
+
+[espn-dp-legacy-dataservices-admin]
+role_arn = arn:aws:iam::550060283415:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = 011892
+
+[cricinfo-dataservices-admin]
+role_arn = arn:aws:iam::648844005914:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = 0096ff
+
+[disnow-qa-dataservices-admin]
+role_arn = arn:aws:iam::857601033519:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = ff9300
+
+[disnow-sb-dataservices-admin]
+role_arn = arn:aws:iam::294846224553:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = 00f900
+
+[disnow-prod-dataservices-admin]
+role_arn = arn:aws:iam::569343666226:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = ff2600
+
+[abcfe-qa-dataservices-admin]
+role_arn = arn:aws:iam::903836495127:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = ff9300
+
+[abcfe-prod-dataservices-admin]
+role_arn = arn:aws:iam::127124643299:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = ff2600
+
+[tomorrowland-dataservices-admin]
+role_arn = arn:aws:iam::049826115511:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = ff2600
+
+[um-prod-dataservices-admin]
+role_arn = arn:aws:iam::175437860676:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = ff2600
+
+[semfs-dataservices-admin]
+role_arn = arn:aws:iam::856774278771:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = ff2600
+
+[news-dataservices-admin]
+role_arn = arn:aws:iam::755710071517:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = ff2600
+
+[um-nonprod-dataservices-admin]
+role_arn = arn:aws:iam::339912394116:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = ff2600
+
+[otv-dataservices-admin]
+role_arn = arn:aws:iam::356379865219:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = ff2600
+
+[dtci-gopub-dataservices-admin]
+role_arn = arn:aws:iam::465797644872:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = ff2600
+
+[dtss-cms-dataservices-admin]
+role_arn = arn:aws:iam::912856097118:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = ff2600
+
+[wdpr-gopub-dataservices-admin]
+role_arn = arn:aws:iam::068454253926:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = ff2600
+
+[datg-vp-eng-dataservices-admin]
+role_arn = arn:aws:iam::284901204482:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = ff2600
+
+[datg-vp-eng-poc-dataservices-admin]
+role_arn = arn:aws:iam::565737879434:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = 00f900
+
+[oscars-dataservices-admin]
+role_arn = arn:aws:iam::313891654442:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = ff2600
+
+[abcfe-sb-dataservices-admin]
+role_arn = arn:aws:iam::326404622875:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = 00f900
+
+[tech-reporting-dataservices-admin]
+role_arn = arn:aws:iam::108036100621:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = ff2600
+
+[espnsa-sb-dataservices-admin]
+role_arn = arn:aws:iam::568616018036:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = 00f900
+
+[ngaws-qa-dataservices-admin]
+role_arn = arn:aws:iam::990231162763:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = ff9300
+
+[ngs-prod-legacy-dataservices-admin]
+role_arn = arn:aws:iam::791826329899:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = ff2600
+
+[ie-security-sb-dataservices-admin]
+role_arn = arn:aws:iam::362748630582:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = 00f900
+
+[wdi-intl-tech-dataservices-admin]
+role_arn = arn:aws:iam::978966463664:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = 00f900
+
+[marvel-nonprod-dataservices-admin]
+role_arn = arn:aws:iam::221020834141:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = 00f900
+
+[intl-media-dev-dataservices-admin]
+role_arn = arn:aws:iam::125018168963:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = 00f900
+
+[unison-non-prod-dataservices-admin]
+role_arn = arn:aws:iam::191804367020:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = 00f900
+
+[d2c-intl-shared-prod-dataservices-admin]
+role_arn = arn:aws:iam::789765585438:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = ff2600
+
+[ngaws-infra-dev-dataservices-admin]
+role_arn = arn:aws:iam::002542999868:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = 00f900
+
+[ngaws-infra-prod-dataservices-admin]
+role_arn = arn:aws:iam::537288885220:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = ff2600
+
+[ngaws-auth-dataservices-admin]
+role_arn = arn:aws:iam::095427510265:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = ff2600
+
+[ngst-arch-dataservices-admin]
+role_arn = arn:aws:iam::189966384944:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = ff2600
+
+[ngaws-spi-test-dataservices-admin]
+role_arn = arn:aws:iam::121334479271:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = fefb00
+
+[ngaws-spi-prod-dataservices-admin]
+role_arn = arn:aws:iam::725018544305:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = ff2600
+
+[hervenatgeo-prod-dataservices-admin]
+role_arn = arn:aws:iam::375175618902:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = ff2600
+
+[ngaws-sbx-dataservices-admin]
+role_arn = arn:aws:iam::803480288556:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = ff2600
+
+[ngaws-dev-dataservices-admin]
+role_arn = arn:aws:iam::912788028112:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = 00f900
+
+[ngaws-uat-dataservices-admin]
+role_arn = arn:aws:iam::377933915970:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = ff9300
+
+[ngaws-stage-dataservices-admin]
+role_arn = arn:aws:iam::561850547660:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = fefb00
+
+[ngaws-prod-dataservices-admin]
+role_arn = arn:aws:iam::400446008350:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = ff2600
+
+[latam-espn-nonprod-dataservices-admin]
+role_arn = arn:aws:iam::488868803049:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = 00f900
+
+[metadata-prod-dataservices-admin]
+role_arn = arn:aws:iam::405980242637:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = ff2600
+
+[dtci-infraeng-cloudops-dataservices-admin]
+role_arn = arn:aws:iam::759220465175:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = ff2600
+
+[dtci-cd-engineering-prod-dataservices-admin]
+role_arn = arn:aws:iam::017504420768:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = ff2600
+
+[dtci-tech-infraeng-cd-nonprod-dataservices-admin]
+role_arn = arn:aws:iam::646374784610:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = 00f900
+
+[twds-dmd-nonprod-dataservices-admin]
+role_arn = arn:aws:iam::792269430200:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = 00f900
+
+[twds-dmd-prod-dataservices-admin]
+role_arn = arn:aws:iam::856331076582:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = ff2600
+
+[dtci-sec-eng-pri-bookmark-prod-dataservices-admin]
+role_arn = arn:aws:iam::055375247193:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = ff2600
+
+[ie-security-internal-dataservices-admin]
+role_arn = arn:aws:iam::150043900689:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = ff2600
+
+[dtci-contdist-sandbox-dataservices-admin]
+role_arn = arn:aws:iam::349462454173:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = 00f900
+
+[dtci-dns-nonprod-dataservices-admin]
+role_arn = arn:aws:iam::160716915745:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = 00f900
+
+[dtci-dns-prod-dataservices-admin]
+role_arn = arn:aws:iam::829950725147:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = ff2600
+
+[dtci-dist-plat-sandbox-dataservices-admin]
+role_arn = arn:aws:iam::422390228687:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = 00f900
+
+[seabc-cross-acct-mgmt-dataservices-admin]
+role_arn = arn:aws:iam::221738668890:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = ff2600
+
+[intl-legacy-au-dataservices-admin]
+role_arn = arn:aws:iam::933503394269:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = 00f900
+
+[intl-legacy-prd-dataservices-admin]
+role_arn = arn:aws:iam::998216918676:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = ff2600
+
+[intl-legacy-ru-dataservices-admin]
+role_arn = arn:aws:iam::866092092521:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = 00f900
+
+[intl-line-tst-dataservices-admin]
+role_arn = arn:aws:iam::908521441591:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = 00f900
+
+[dtci-dmd-qat]
+role_arn = arn:aws:iam::9501117149463:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = ff2600

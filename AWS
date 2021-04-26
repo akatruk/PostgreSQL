@@ -1,0 +1,73 @@
+[twds-dmd-prod-dataservices-admin]
+role_arn = arn:aws:iam::856331076582:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = ff2600
+[espn-cse-sandbox]
+role_arn = arn:aws:iam::731470219037:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = ff2601
+[espn-cse]
+role_arn = arn:aws:iam::621809971961:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = ff2602
+[messaging-int-db]
+role_arn = arn:aws:iam::792269430200:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = ff2601
+[dtci-master]
+aws_account_id = dtci-master
+[dtci-master-dataservices-admin]
+role_arn = arn:aws:iam::306630887120:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = ff2600
+[dtci-master]
+aws_account_id = dtci-master
+[dtci-pci-master]
+aws_account_id = dtci-pci-master
+[dtci-master-dataservices-admin]
+role_arn = arn:aws:iam::306630887120:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = ff2600
+[dtci-pci-master-dataservices-admin]
+role_arn = arn:aws:iam::933068053463:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-pci-master
+color = ff2600
+[video-services-sandbox]
+role_arn = arn:aws:iam::302956428869:role/dtci-cross-account-dataservices-admin
+color = 00ff00
+source_profile = dtci-master
+[video-services-qa]
+role_arn = arn:aws:iam::934824089844:role/dtci-cross-account-dataservices-admin
+color = 0000ff
+source_profile = dtci-master
+[dtci-entitlements-sandbox]
+role_arn = arn:aws:iam::715600117545:role/dtci-cross-account-dataservices-admin
+color = 00ff00
+source_profile = dtci-pci-master
+[dtci-entitlements-qa]
+role_arn = arn:aws:iam::417932122073:role/dtci-cross-account-dataservices-admin
+color = 0000ff
+source_profile = dtci-pci-master
+[dtci-entitlements-prod]
+role_arn = arn:aws:iam::915539582154:role/dtci-cross-account-dataservices-admin
+color = ff0000
+source_profile = dtci-pci-master
+[dtci-dmd-stg]
+role_arn = arn:aws:iam::807760185374:role/dtci-cross-account-dataservices-admin
+color = ff0000
+[twds-dmd-nonprod-dataservices-admin]
+role_arn = arn:aws:iam::792269430200:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = 00f900
+[um-nonprod-dataservices-admin]
+role_arn = arn:aws:iam::339912394116:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = ff2600
+[um-prod-dataservices-admin]
+role_arn = arn:aws:iam::175437860676:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = ff2600
+[cricinfo-dataservices-admin]
+role_arn = arn:aws:iam::648844005914:role/dtci-cross-account-dataservices-admin
+source_profile = dtci-master
+color = 0096ff
