@@ -1,0 +1,16 @@
+2025-02-24 20:52:01.686 +07 [49576] ERROR could not open auth_file userlist.txt: No such file or directory
+2025-02-24 20:52:01.694 +07 [49576] FATAL could not find user 'postgres' to switch to
+2025-02-24 20:52:11.739 +07 [49733] ERROR could not open auth_file userlist.txt: No such file or directory
+2025-02-24 20:52:11.745 +07 [49733] FATAL could not find user 'postgres' to switch to
+2025-02-24 20:52:21.773 +07 [49893] ERROR could not open auth_file userlist.txt: No such file or directory
+2025-02-24 20:52:21.779 +07 [49893] FATAL could not find user 'postgres' to switch to
+2025-02-24 20:52:31.824 +07 [50051] ERROR could not open auth_file userlist.txt: No such file or directory
+2025-02-24 20:52:31.831 +07 [50051] FATAL could not find user 'postgres' to switch to
+2025-02-24 20:52:41.872 +07 [50202] ERROR could not open auth_file userlist.txt: No such file or directory
+2025-02-24 20:52:41.877 +07 [50202] FATAL could not find user 'postgres' to switch to
+2025-02-24 20:52:51.905 +07 [50350] ERROR could not open auth_file userlist.txt: No such file or directory
+2025-02-24 20:52:51.910 +07 [50350] FATAL could not find user 'postgres' to switch to
+2025-02-24 20:53:01.951 +07 [50490] ERROR could not open auth_file userlist.txt: No such file or directory
+2025-02-24 20:53:01.955 +07 [50490] FATAL could not find user 'postgres' to switch to
+2025-02-24 20:53:11.991 +07 [50632] ERROR could not open auth_file userlist.txt: No such file or directory
+2025-02-24 20:53:11.998 +07 [50632] FATAL could not find user 'postgres' to switch to
