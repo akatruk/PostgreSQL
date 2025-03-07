@@ -33,4 +33,4 @@ END;
 $$ LANGUAGE plpgsql;
 
 -- Return all results
-SELECT * FROM tmp_pgstattuple_results ORDER BY dead_tuple_percent;
+SELECT * FROM tmp_pgstattuple_results ORDER BY dead_tuple_percent desc;
